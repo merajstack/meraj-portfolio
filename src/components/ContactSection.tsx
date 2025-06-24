@@ -51,7 +51,9 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-gray-400">Email</p>
-                    <p className="text-white">meraj@example.com</p>
+                    <a href="mailto:meraj.md5862@gmail.com" className="text-white hover:text-cyber-cyan transition-colors">
+                      meraj.md5862@gmail.com
+                    </a>
                   </div>
                 </div>
                 
@@ -61,7 +63,14 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-gray-400">LinkedIn</p>
-                    <p className="text-white">linkedin.com/in/meraj</p>
+                    <a 
+                      href="https://www.linkedin.com/in/meraj-mohammed-526564362/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-cyber-cyan transition-colors"
+                    >
+                      linkedin.com/in/meraj-mohammed
+                    </a>
                   </div>
                 </div>
                 
@@ -71,7 +80,14 @@ export const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-gray-400">GitHub</p>
-                    <p className="text-white">github.com/meraj</p>
+                    <a 
+                      href="https://github.com/merajstack" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-cyber-cyan transition-colors"
+                    >
+                      github.com/merajstack
+                    </a>
                   </div>
                 </div>
               </div>
