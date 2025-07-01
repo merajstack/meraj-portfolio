@@ -27,21 +27,18 @@ const learningSkills = [
 ];
 
 export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
-  const [hasAnimated, setHasAnimated] = useState(false);
   const [visibleSkills, setVisibleSkills] = useState<number>(0);
-  const hasAnimatedRef = useRef(false); // 🔒 Instant-lock
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
     const skillsElement = document.getElementById('skills-section');
-    if (!skillsElement || hasAnimatedRef.current) return;
+    if (!skillsElement) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimatedRef.current) {
-            hasAnimatedRef.current = true; // ✅ Lock immediately
-            setHasAnimated(true); // optional, for UI changes
-
+            hasAnimatedRef.current = true;
             const totalSkills = certifiedSkills.length + nonCertifiedSkills.length + learningSkills.length;
             let count = 0;
             const interval = setInterval(() => {
@@ -50,7 +47,7 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
               if (count >= totalSkills) {
                 clearInterval(interval);
               }
-            }, 200);
+            }, 150); // smooth appearance
           }
         });
       },
@@ -58,22 +55,17 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
     );
 
     observer.observe(skillsElement);
-
-    return () => observer.disconnect(); // 💡 Clean up safely
+    return () => observer.disconnect();
   }, []);
 
   const SkillCard = ({ skill, index, category }: { skill: any; index: number; category: string }) => {
     const isVisible = visibleSkills > index;
-    
     return (
       <div
-        className={`skill-card rounded-xl p-6 text-center transform transition-all duration-500 ${
-          isVisible ? 'animate-skill-emerge opacity-100' : 'opacity-0'
+        className={`skill-card rounded-xl p-6 text-center transition-all duration-500 ease-out transform ${
+          isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
         }`}
-        style={{
-          animationDelay: `${index * 0.1}s`,
-          transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(50px) scale(0.8)'
-        }}
+        style={{ transitionDelay: `${index * 0.1}s` }}
       >
         <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${skill.color} flex items-center justify-center text-white font-bold text-xl`}>
           {skill.name.charAt(0)}
@@ -84,8 +76,8 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
           <span className={`px-3 py-1 rounded-full text-xs font-medium ${
             category === 'certified' ? 'bg-green-900 text-green-300' :
             category === 'proficient' ? 'bg-blue-900 text-blue-300' :
-            'bg-orange-900 text-orange-300'
-          }`}>
+            'bg-orange-900 text-orange-300'}`}
+          >
             {category.toUpperCase()}
           </span>
         </div>
@@ -95,7 +87,6 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
 
   return (
     <section id="skills-section" className="py-20 px-6 relative overflow-hidden">
-      {/* 3D Earth Animation */}
       <div 
         className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10"
         style={{
@@ -104,15 +95,7 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
       >
         <div className="w-[600px] h-[600px] rounded-full earth-glow animate-rotate-earth"
           style={{
-            background: `radial-gradient(circle at 40% 30%, 
-              rgba(69, 162, 158, 0.6), 
-              rgba(31, 40, 51, 0.8), 
-              rgba(11, 12, 16, 0.9)),
-              conic-gradient(from 0deg, 
-              rgba(102, 252, 241, 0.1), 
-              rgba(69, 162, 158, 0.2), 
-              rgba(31, 40, 51, 0.3), 
-              rgba(102, 252, 241, 0.1))`
+            background: `radial-gradient(circle at 40% 30%, rgba(69, 162, 158, 0.6), rgba(31, 40, 51, 0.8), rgba(11, 12, 16, 0.9)), conic-gradient(from 0deg, rgba(102, 252, 241, 0.1), rgba(69, 162, 158, 0.2), rgba(31, 40, 51, 0.3), rgba(102, 252, 241, 0.1))`
           }}
         />
       </div>
@@ -128,7 +111,6 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
           <div className="w-24 h-1 bg-gradient-to-r from-cyber-cyan to-steel-blue mx-auto mt-6"></div>
         </div>
 
-        {/* Certified Skills */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-green-400 mb-8 text-center">🏆 Certified Expertise</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -138,7 +120,6 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
           </div>
         </div>
 
-        {/* Non-Certified Skills */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-blue-400 mb-8 text-center">⚡ Proficient Tools</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -153,7 +134,6 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
           </div>
         </div>
 
-        {/* Learning Skills */}
         <div>
           <h3 className="text-2xl font-bold text-orange-400 mb-8 text-center">🚀 Currently Learning</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
