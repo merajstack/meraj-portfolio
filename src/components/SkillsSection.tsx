@@ -27,16 +27,18 @@ const learningSkills = [
 ];
 
 export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
+  const [hasAnimated, setHasAnimated] = useState(false);
   const [visibleSkills, setVisibleSkills] = useState<number>(0);
 
   useEffect(() => {
     const skillsElement = document.getElementById('skills-section');
-    if (!skillsElement) return;
+    if (!skillsElement || hasAnimated) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
             // Animate skills appearing one by one
             const totalSkills = certifiedSkills.length + nonCertifiedSkills.length + learningSkills.length;
             let count = 0;
@@ -47,6 +49,9 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
                 clearInterval(interval);
               }
             }, 200);
+            
+            // Disconnect observer after animation starts
+            observer.disconnect();
           }
         });
       },
@@ -55,7 +60,7 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
 
     observer.observe(skillsElement);
     return () => observer.disconnect();
-  }, []);
+  }, [hasAnimated]);
 
   const SkillCard = ({ skill, index, category }: { skill: any; index: number; category: string }) => {
     const isVisible = visibleSkills > index;
