@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface SkillsSectionProps {
   scrollY: number;
@@ -29,17 +29,19 @@ const learningSkills = [
 export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const [visibleSkills, setVisibleSkills] = useState<number>(0);
+  const hasAnimatedRef = useRef(false); // 🔒 Instant-lock
 
   useEffect(() => {
     const skillsElement = document.getElementById('skills-section');
-    if (!skillsElement || hasAnimated) return;
+    if (!skillsElement || hasAnimatedRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            setHasAnimated(true);
-            // Animate skills appearing one by one
+          if (entry.isIntersecting && !hasAnimatedRef.current) {
+            hasAnimatedRef.current = true; // ✅ Lock immediately
+            setHasAnimated(true); // optional, for UI changes
+
             const totalSkills = certifiedSkills.length + nonCertifiedSkills.length + learningSkills.length;
             let count = 0;
             const interval = setInterval(() => {
@@ -49,9 +51,6 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
                 clearInterval(interval);
               }
             }, 200);
-            
-            // Disconnect observer after animation starts
-            observer.disconnect();
           }
         });
       },
@@ -59,8 +58,9 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
     );
 
     observer.observe(skillsElement);
-    return () => observer.disconnect();
-  }, [hasAnimated]);
+
+    return () => observer.disconnect(); // 💡 Clean up safely
+  }, []);
 
   const SkillCard = ({ skill, index, category }: { skill: any; index: number; category: string }) => {
     const isVisible = visibleSkills > index;
