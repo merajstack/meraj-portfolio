@@ -5,25 +5,29 @@ export const CertificatesSection = () => {
       title: "C++ Programming",
       issuer: "Platform TBD",
       date: "2024",
-      color: "from-blue-500 to-blue-700"
+      color: "from-blue-500 to-blue-700",
+      link: null
     },
     {
       title: "Python Programming",
-      issuer: "Platform TBD", 
+      issuer: "HackerRank", 
       date: "2024",
-      color: "from-green-500 to-green-700"
+      color: "from-green-500 to-green-700",
+      link: "https://www.hackerrank.com/certificates/iframe/a7b26ec538d0"
     },
     {
       title: "HTML & CSS",
-      issuer: "Platform TBD",
+      issuer: "freeCodeCamp",
       date: "2024", 
-      color: "from-orange-500 to-purple-500"
+      color: "from-orange-500 to-purple-500",
+      link: "https://www.freecodecamp.org/certification/meraj_01/responsive-web-design"
     },
     {
       title: "AI Engineering (In Progress)",
       issuer: "IBM",
       date: "2024",
-      color: "from-cyber-cyan to-steel-blue"
+      color: "from-cyber-cyan to-steel-blue",
+      link: null
     }
   ];
 
@@ -59,9 +63,20 @@ export const CertificatesSection = () => {
               
               <div className="flex justify-between items-center">
                 <span className="text-cyber-cyan font-medium">{cert.date}</span>
-                <button className="text-steel-blue hover:text-cyber-cyan transition-colors duration-300">
-                  View Certificate →
-                </button>
+                {cert.link ? (
+                  <a 
+                    href={cert.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-steel-blue hover:text-cyber-cyan transition-colors duration-300"
+                  >
+                    View Certificate →
+                  </a>
+                ) : (
+                  <span className="text-gray-500">
+                    Certificate Pending
+                  </span>
+                )}
               </div>
             </div>
           ))}
