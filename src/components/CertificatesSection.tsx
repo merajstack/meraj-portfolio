@@ -3,10 +3,10 @@ export const CertificatesSection = () => {
   const certificates = [
     {
       title: "C++ Programming",
-      issuer: "Platform TBD",
+      issuer: "BIET Learning Systems",
       date: "2024",
       color: "from-blue-500 to-blue-700",
-      link: null
+      link: "https://certificate-merajstacks-projects.vercel.app/"
     },
     {
       title: "Python Programming",
