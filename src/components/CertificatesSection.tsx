@@ -3,21 +3,21 @@ export const CertificatesSection = () => {
   const certificates = [
     {
       title: "C++ Programming",
-      issuer: "BIET Learning Systems",
+      issuer: "BIET Learning Systems.",
       date: "2024",
       color: "from-blue-500 to-blue-700",
       link: "https://certificate-merajstacks-projects.vercel.app/"
     },
     {
       title: "Python Programming",
-      issuer: "HackerRank", 
+      issuer: "HackerRank.", 
       date: "2024",
       color: "from-green-500 to-green-700",
       link: "https://www.hackerrank.com/certificates/iframe/a7b26ec538d0"
     },
     {
       title: "HTML & CSS",
-      issuer: "freeCodeCamp",
+      issuer: "freeCodeCamp.",
       date: "2024", 
       color: "from-orange-500 to-purple-500",
       link: "https://www.freecodecamp.org/certification/meraj_01/responsive-web-design"
