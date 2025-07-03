@@ -106,7 +106,7 @@ export const SkillsSection = ({ scrollY }: SkillsSectionProps) => {
             Skills Universe
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Watch my skills emerge from the digital cosmos like satellites orbiting Earth
+          “Watch my skills evolve in real time — crafted with purpose, refined through code, and built to make an impact.”
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-cyber-cyan to-steel-blue mx-auto mt-6"></div>
         </div>
