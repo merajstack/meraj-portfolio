@@ -13,7 +13,7 @@ export const CertificatesSection = () => {
       issuer: "HackerRank.", 
       date: "2024",
       color: "from-green-500 to-green-700",
-      link: "https://www.hackerrank.com/certificates/iframe/a7b26ec538d0"
+      link: "https://www.hackerrank.com/certificates/a7b26ec538d0"
     },
     {
       title: "HTML & CSS",
