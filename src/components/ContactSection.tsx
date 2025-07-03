@@ -147,7 +147,7 @@ export const ContactSection = () => {
       {/* Footer */}
       <div className="text-center mt-20 pt-8 border-t border-space-gray">
         <p className="text-gray-400">
-          © 2024 Meraj. Crafted with passion for AI/ML Engineering.
+          © 2025 Meraj. Crafted with passion for AI/ML Engineering.
         </p>
       </div>
     </section>
